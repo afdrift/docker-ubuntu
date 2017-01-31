@@ -22,16 +22,14 @@ RUN apt-get --quiet --yes update && \
 #RUN apt-get install --yes nodejs
 
 ENV NVM_DIR /usr/local/nvm
-ENV NODE_VERSION 6.9
+
 
 #use nvm instead of nodejs
 RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh | bash - \
     && . $NVM_DIR/nvm.sh \
-    && nvm install $NODE_VERSION \
-    && nvm alias default $NODE_VERSION \
+    && nvm install --lts=argon \
+    && nvm install --lts=boron \
+    && nvm alias default lts/boron \
     && nvm use default
-
-COPY nvm.sh /usr/local/bin/nvm
-RUN chmod +x /usr/local/bin/nvm
 
 ENV PATH ./node_modules/bin:$PATH
