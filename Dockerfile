@@ -31,4 +31,7 @@ RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh
     && nvm alias default $NODE_VERSION \
     && nvm use default
 
-ENV PATH $PATH:./node_modules/bin
+COPY nvm.sh /usr/local/bin/nvm
+RUN chmod +x /usr/local/bin/nvm
+
+ENV PATH ./node_modules/bin:$PATH
