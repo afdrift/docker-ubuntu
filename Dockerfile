@@ -22,8 +22,9 @@ RUN apt-get --quiet --yes update && \
 #RUN apt-get install --yes nodejs
 
 ENV NVM_DIR /usr/local/nvm
+ENV PATH ./node_modules/bin:$PATH
 
-
+ARG CACHEBUST=0
 #use nvm instead of nodejs
 RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh | bash - \
     && . $NVM_DIR/nvm.sh \
@@ -32,4 +33,3 @@ RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh
     && nvm alias default lts/boron \
     && nvm use default
 
-ENV PATH ./node_modules/bin:$PATH
